@@ -30,7 +30,7 @@ The Complete Course on Three.js using React: Three.js at Udemy
       "use-cannon": "^0.5.3",
     }
   ```
-* **What is react-three-fiber?**
+* **react-three-fiber**
   * [react-three-fiber](https://github.com/pmndrs/react-three-fiber) is a React renderer for [threejs](https://threejs.org/) on the web and react-native*.
     * Gives more semantic layout and assumes reasonable defaults, making it easy to get up and running quickly with less code.
 
