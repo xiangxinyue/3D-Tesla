@@ -1,41 +1,64 @@
+import { useEffect, useState } from 'react';
 import './App.css';
-import { Canvas, extend, useFrame, useThree } from 'react-three-fiber';
-import { useRef } from 'react';
-import { OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
-extend({OrbitControls});
-
-const Orbit = () =>{
-  const {camera, gl} = useThree();
-  return (
-    <OrbitControls args={[camera, gl.domElement]}/>
-  )
-}
-
-const Box = props => {
-  const ref = useRef();
-  useFrame(state => {
-    console.log(state);
-    ref.current.rotation.x += 0.01;
-    ref.current.rotation.y += 0.01;
-  });
-
-  return (
-    <mesh ref = {ref} {...props}>
-      <boxBufferGeometry/>
-      <meshBasicMaterial color='blue'/>
-    </mesh>
-  )
-}
+import {
+    Canvas, useFrame
+} from 'react-three-fiber';
+import { Physics } from 'use-cannon';
+import { Suspense } from 'react';
+import Orbit from './components/Orbit';
+import Box from './components/Box';
+import Background from './components/Background';
+import Floor from './components/Floor';
+import ColorPicker from './components/ColorPicker';
+import Cars from './components/Cars'
+import CameraControls from './components/CameraControls'
+import CameraButtons from './components/CameraButtons'
+import Lights from './components/Lights'
+import Effects from './components/Effects'
+import Spinner from "./components/Spinner";
 
 function App() {
+    const [windowDimensions, setWindowDimensions] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+    }, [windowDimensions]);
+
+    const handleResize = () => {
+        setWindowDimensions({
+            width: window.innerWidth,
+            height: window.innerHeight
+        });
+    };
   return (
     <div style={{height: '100vh', width: '100vw'}}>
-      <Canvas 
-      style={{background: 'black'}}
-      camera={{position: [3,3,3]}}>
-      <Box position={[0,0,0]}/>
-      <Orbit />
-      <axesHelper args={[5]}/>
+      <ColorPicker />
+      <CameraButtons />
+      <Canvas
+        gl={{
+          powerPreference: "high-performance",
+          antialias: false,
+          stencil: false,
+          depth: false
+        }}
+        shadowMap
+        style={{background: 'black'}}
+        camera={{ position: [7,7,7] }}
+      >
+        <Suspense fallback={<Spinner />}>
+            <Background windowDimensions={windowDimensions} />
+        </Suspense>
+        <CameraControls />
+        <Lights/>
+        <Orbit />
+        <Physics>
+          <Cars />
+          <Floor position={[0,-0.5,0]}/>
+        </Physics>
+        <Effects />
       </Canvas>
     </div>
   );
