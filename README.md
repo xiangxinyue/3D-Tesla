@@ -1,15 +1,8 @@
-# Introduction to React Three Fiber
-![Preview](/public/getting_started.png)
+# 3D Tesla
+Learn Three.js using React: Build a 3D Tesla Workshop 2021
+The Complete Course on Three.js using React: Three.js at Udemy
 
 ## 1. Setup
-
-* **What is react-three-fiber?**
-  * [react-three-fiber](https://github.com/pmndrs/react-three-fiber) is a React renderer for [threejs](https://threejs.org/) on the web and react-native*.
-    * Gives more semantic layout and assumes reasonable defaults, making it easy to get up and running quickly with less code.
-  * Use-cases:
-    * Rendering graphics in the browser with React or on mobile and web with React Native*.
-
-*Limited documentation on react-native see https://github.com/pmndrs/react-three-fiber/blob/master/markdown/recipes.md#usage-with-react-native.
 
 * **Prerequisites**
   * React, JavaScript, HTML, CSS
@@ -37,6 +30,10 @@
       "use-cannon": "^0.5.3",
     }
   ```
+* **What is react-three-fiber?**
+  * [react-three-fiber](https://github.com/pmndrs/react-three-fiber) is a React renderer for [threejs](https://threejs.org/) on the web and react-native*.
+    * Gives more semantic layout and assumes reasonable defaults, making it easy to get up and running quickly with less code.
+
 * **Assets**
   * .gltf files from [sketchfab](https://sketchfab.com/).
 
